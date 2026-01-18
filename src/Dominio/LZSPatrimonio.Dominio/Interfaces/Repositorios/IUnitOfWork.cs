@@ -2,5 +2,6 @@ namespace LZSPatrimonio.Dominio.Interfaces.Repositorios;
 
 public interface IUnitOfWork
 {
-    Task<int> CommitAsync();
+    Task<bool> CommitAsync();
+    bool DatabaseExists();
 }

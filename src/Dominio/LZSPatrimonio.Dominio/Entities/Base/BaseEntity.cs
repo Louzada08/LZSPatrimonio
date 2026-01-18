@@ -9,19 +9,19 @@ public class BaseEntity : IBaseEntity
         Id = Guid.NewGuid();
     }
 
-    public BaseEntity(DateTime createdAt) : this()
+    public BaseEntity(DateTime criadoEm) : this()
     {
-        CreatedAt = createdAt;
+        CriadoEmUtc = criadoEm;
     }
 
-    public BaseEntity(Guid id, DateTime createdAt)
+    public BaseEntity(Guid id, DateTime criadoEm)
     {
         Id = id;
-        CreatedAt = createdAt;
+        CriadoEmUtc = criadoEm;
     }
 
     public Guid Id { get; set; }
-    public DateTime? CreatedAt { get; set; }
-    public DateTime? UpdatedAt { get; set; }
-    public DateTime? DeletedAt { get; set; } = null;
+    public DateTime? CriadoEmUtc { get; set; }
+    public DateTime? AtualizadoEmUtc { get; set; }
+    public DateTime? DeletadoEmUtc { get; set; } = null;
 }
