@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{28BA6BB7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dominio", "Dominio", "{EF716607-E204-4841-8E10-420A3F5A0946}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{E2AF8FDE-155C-4E44-9EA2-83C45FD72D2F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestrutura", "Infraestrutura", "{E2AF8FDE-155C-4E44-9EA2-83C45FD72D2F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InterfaceAdapter", "InterfaceAdapter", "{8DDB8734-D47D-4E36-AF0E-36CF0FAD9E98}"
 EndProject
@@ -26,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LZSPatrimonio.Aplicacao", "src\Aplicacao\LZSPatrimonio.Aplicacao\LZSPatrimonio.Aplicacao.csproj", "{EF85B98C-D578-4513-B1B9-D4EAC169C8C2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LZSPatrimonio.Dominio", "src\Dominio\LZSPatrimonio.Dominio\LZSPatrimonio.Dominio.csproj", "{A030F127-06DF-43CA-A454-53FED3E99FBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LZSPatrimonio.Infra", "src\Infraestrutura\LZSPatrimonio.Infra\LZSPatrimonio.Infra.csproj", "{5D6E99E5-9271-417E-A82B-3058E406A763}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A030F127-06DF-43CA-A454-53FED3E99FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A030F127-06DF-43CA-A454-53FED3E99FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A030F127-06DF-43CA-A454-53FED3E99FBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D6E99E5-9271-417E-A82B-3058E406A763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D6E99E5-9271-417E-A82B-3058E406A763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D6E99E5-9271-417E-A82B-3058E406A763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D6E99E5-9271-417E-A82B-3058E406A763}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{470F450D-5D62-462B-80F1-3DD69F01C111} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{EF85B98C-D578-4513-B1B9-D4EAC169C8C2} = {2DF4ED42-DC52-4627-9FC8-29121494E17E}
 		{A030F127-06DF-43CA-A454-53FED3E99FBB} = {EF716607-E204-4841-8E10-420A3F5A0946}
+		{5D6E99E5-9271-417E-A82B-3058E406A763} = {E2AF8FDE-155C-4E44-9EA2-83C45FD72D2F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BC27CD7B-1350-4137-B0C8-78A9A506CF24}
