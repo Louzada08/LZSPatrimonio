@@ -16,11 +16,8 @@
 
   <ItemGroup>
     <Folder Include="Dtos\" />
-    <Folder Include="Enums\" />
     <Folder Include="Filtros\" />
     <Folder Include="Interfaces\Servicos\" />
-    <Folder Include="Mediator\" />
-    <Folder Include="Mensagens\" />
     <Folder Include="ObjetosValor\" />
     <Folder Include="ServicosDominio\" />
   </ItemGroup>

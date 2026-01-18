@@ -27,8 +27,8 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity>, IDisposable whe
     {
         if (entity is BaseEntity baseEntity)
         {
-            baseEntity.CreatedAt = DateTime.UtcNow;
-            baseEntity.UpdatedAt = DateTime.UtcNow;
+            baseEntity.CriadoEmUtc = DateTime.UtcNow;
+            baseEntity.AtualizadoEmUtc = DateTime.UtcNow;
         }
 
         DbSet.Add(entity);
@@ -39,7 +39,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity>, IDisposable whe
     {
         if (entity is BaseEntity baseEntity)
         {
-            baseEntity.DeletedAt = DateTime.UtcNow;
+            baseEntity.DeletadoEmUtc = DateTime.UtcNow;
             DbSet.Update(entity);
         }
         else
@@ -64,7 +64,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity>, IDisposable whe
     {
         if (entity is BaseEntity baseEntity)
         {
-            baseEntity.UpdatedAt = DateTime.UtcNow;
+            baseEntity.AtualizadoEmUtc = DateTime.UtcNow;
         }
 
         var entry = Context.Entry(entity);
