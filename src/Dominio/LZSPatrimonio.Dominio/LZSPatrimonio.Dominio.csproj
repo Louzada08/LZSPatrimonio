@@ -17,9 +17,7 @@
   <ItemGroup>
     <Folder Include="Dtos\" />
     <Folder Include="Filtros\" />
-    <Folder Include="Interfaces\Servicos\" />
     <Folder Include="ObjetosValor\" />
-    <Folder Include="ServicosDominio\" />
   </ItemGroup>
 
 </Project>
