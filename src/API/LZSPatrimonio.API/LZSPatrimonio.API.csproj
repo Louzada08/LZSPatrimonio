@@ -17,6 +17,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Aplicacao\LZSPatrimonio.Aplicacao\LZSPatrimonio.Aplicacao.csproj" />
     <ProjectReference Include="..\..\Dominio\LZSPatrimonio.Dominio\LZSPatrimonio.Dominio.csproj" />
+    <ProjectReference Include="..\..\Infraestrutura\LZSPatrimonio.Infra.IoC\LZSPatrimonio.Infra.IoC.csproj" />
+    <ProjectReference Include="..\..\InterfaceAdapter\LZSPatrimonio.InterfaceAdapter\LZSPatrimonio.InterfaceAdapter.csproj" />
   </ItemGroup>
 
 </Project>
