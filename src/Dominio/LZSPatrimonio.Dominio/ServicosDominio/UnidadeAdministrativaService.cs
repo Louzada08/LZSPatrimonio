@@ -1,13 +1,20 @@
 ﻿using LZSPatrimonio.Dominio.Entities;
+using LZSPatrimonio.Dominio.Interfaces.Repositorios;
 using LZSPatrimonio.Dominio.Interfaces.Servicos;
+using Microsoft.EntityFrameworkCore;
 
 namespace LZSPatrimonio.Dominio.ServicosDominio
 {
     public class UnidadeAdministrativaService : IUnidadeAdministrativaService
     {
-        public Task<UnidadeAdministrativa> Create(UnidadeAdministrativa category)
+        private readonly IUnidadeAdministrativaRepository _repository;
+
+        public async Task<UnidadeAdministrativa> Create(UnidadeAdministrativa unAdmin)
         {
-            throw new NotImplementedException();
+            var ret = _repository.Add(unAdmin);
+            await _repository.UnitOfWork.CommitAsync();
+
+            return ret;
         }
 
         public Task Delete(UnidadeAdministrativa category)
@@ -15,9 +22,10 @@ namespace LZSPatrimonio.Dominio.ServicosDominio
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<UnidadeAdministrativa>> GetAll()
+        public async Task<IEnumerable<UnidadeAdministrativa>> GetAll()
         {
-            throw new NotImplementedException();
+            var response = await _repository.QueryableFor().ToListAsync();
+            return response;
         }
 
         public Task<UnidadeAdministrativa> GetById(Guid? id)

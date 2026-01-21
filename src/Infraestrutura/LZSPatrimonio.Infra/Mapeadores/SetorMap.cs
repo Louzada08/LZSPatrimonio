@@ -27,7 +27,7 @@ namespace LZSPatrimonio.Infra.Mapeadores
 
             builder.Property(x => x.UnidadeId)
                 .IsRequired()
-                .HasColumnType("uniqueidentifier");
+                .HasColumnType("uuid");
 
             builder.HasOne(x => x.Unidade)
                 .WithMany(u => u.Setores)

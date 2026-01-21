@@ -2,7 +2,6 @@
 using LZSPatrimonio.Dominio.ServicosDominio;
 using LZSPatrimonio.Infra.Data;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace LZSPatrimonio.Infra.IoC.InjetorServicos
 {
