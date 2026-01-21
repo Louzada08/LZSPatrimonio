@@ -1,11 +1,6 @@
 ﻿using LZSPatrimonio.Dominio.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LZSPatrimonio.Infra.Mapeadores
 {
@@ -23,7 +18,7 @@ namespace LZSPatrimonio.Infra.Mapeadores
 
             builder.Property(x => x.CodigoInterno)
                 .IsRequired()
-                .HasColumnType("short")
+                .HasColumnType("smallint")
                 .HasMaxLength(5);
 
             builder.Property(x => x.Sigla)
@@ -31,19 +26,18 @@ namespace LZSPatrimonio.Infra.Mapeadores
                 .HasColumnType("varchar")
                 .HasMaxLength(20);
 
-            builder.Property(x => x.UnidadeAdminstrativaId)
-                .IsRequired()
-                .HasColumnType("uniqueidentifier");
-
             builder.Property(x => x.TipoFundo)
                 .IsRequired()
                 .HasColumnType("int");
+
+            builder.Property(x => x.UnidadeAdminstrativaId)
+                .IsRequired()
+                .HasColumnType("uuid");
 
             builder.HasOne(x => x.UnidadeAdministrativa)
                 .WithMany(u => u.Unidades)
                 .HasForeignKey(x => x.UnidadeAdminstrativaId)
                 .OnDelete(DeleteBehavior.NoAction);
-
         }
     }
 }

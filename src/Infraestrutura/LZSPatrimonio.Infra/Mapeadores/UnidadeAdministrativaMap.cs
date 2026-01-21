@@ -18,7 +18,7 @@ namespace LZSPatrimonio.Infra.Mapeadores
 
             builder.Property(u => u.CodigoInterno)
                 .IsRequired()
-                .HasColumnType("short")
+                .HasColumnType("smallint")
                 .HasMaxLength(5);
         }
     }

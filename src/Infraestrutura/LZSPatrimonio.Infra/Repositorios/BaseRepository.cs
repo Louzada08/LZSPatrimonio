@@ -4,26 +4,25 @@ using LZSPatrimonio.Dominio.Interfaces.Repositorios;
 using LZSPatrimonio.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace LZSPatrimonio.Infra.Repositorios;
 
-public class BaseRepository<TEntity> : IBaseRepository<TEntity>, IDisposable where TEntity : BaseEntity
+public class BaseRepository<T> : IBaseRepository<T>, IDisposable where T : class
 {
     public AppDbContext Context { get; }
     public IUnitOfWork UnitOfWork { get; set; }
-    protected readonly DbSet<TEntity> DbSet;
+    protected readonly DbSet<T> DbSet;
     private readonly IMapper _mapper;
 
     public BaseRepository(AppDbContext context, IMapper mapper)
     {
         Context = context;
-        DbSet = Context.Set<TEntity>();
+        DbSet = Context.Set<T>();
         this.UnitOfWork = Context as IUnitOfWork;
         _mapper = mapper;
     }
-    public async Task AdicionarAsync(TEntity entity)
+
+    public T Add(T entity)
     {
         if (entity is BaseEntity baseEntity)
         {
@@ -32,10 +31,10 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity>, IDisposable whe
         }
 
         DbSet.Add(entity);
-        await Task.CompletedTask;
+        return entity;
     }
 
-    public async Task RemoverAsync(TEntity entity)
+    public T Remove(T entity)
     {
         if (entity is BaseEntity baseEntity)
         {
@@ -47,20 +46,15 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity>, IDisposable whe
             DbSet.Remove(entity);
         }
 
-        await Task.CompletedTask;
+        return entity;
     }
 
-    public async Task<TEntity?> ObterPorIdAsync(Guid id)
+    public T FindById(params object[] ids)
     {
-        return await DbSet.FindAsync(id);
+        return DbSet.Find(ids);
     }
 
-    public async Task<IEnumerable<TEntity>> ObterTodosAsync()
-    {
-        return await DbSet.ToListAsync();
-    }
-
-    public virtual async Task AtualizarAsync(TEntity entity)
+    public virtual T Update(T entity)
     {
         if (entity is BaseEntity baseEntity)
         {
@@ -71,12 +65,12 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity>, IDisposable whe
         DbSet.Attach(entity);
         entry.State = EntityState.Modified;
 
-        await Task.CompletedTask;
+        return entity;
     }
 
-    public IQueryable<TEntity> QueryableFilter() => DbSet.AsQueryable();
+    public IQueryable<T> QueryableFilter() => DbSet.AsQueryable();
 
-    public IQueryable<TEntity> QueryableFor(Expression<Func<TEntity, bool>> criteria = null, bool @readonly = false, params Expression<Func<TEntity, object>>[] includes)
+    public IQueryable<T> QueryableFor(Expression<Func<T, bool>> criteria = null, bool @readonly = false, params Expression<Func<T, object>>[] includes)
     {
         if (criteria == null)
         {

@@ -16,9 +16,9 @@ public static class EFFilterExtensions
                .GetMethods(BindingFlags.Public | BindingFlags.Static)
                .Single(t => t.IsGenericMethod && t.Name == "SetSoftDeleteFilter");
 
-    public static void SetSoftDeleteFilter<TEntity>(this ModelBuilder modelBuilder)
-        where TEntity : class, IBaseEntity
+    public static void SetSoftDeleteFilter<T>(this ModelBuilder modelBuilder)
+        where T : class, IBaseEntity
     {
-        modelBuilder.Entity<TEntity>().HasQueryFilter(x => x.DeletadoEmUtc == null);
+        modelBuilder.Entity<T>().HasQueryFilter(x => x.DeletadoEmUtc == null);
     }
 }
