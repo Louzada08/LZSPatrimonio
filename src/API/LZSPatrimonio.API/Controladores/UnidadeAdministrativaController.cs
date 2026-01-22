@@ -6,6 +6,7 @@ using LZSPatrimonio.Aplicacao.Comandos.Unidades.Resposta;
 using LZSPatrimonio.Dominio.Interfaces.Servicos;
 using LZSPatrimonio.Dominio.Validacao;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -38,10 +39,28 @@ public class UnidadeAdministrativaController : PrincipalController
     }
 
     // GET api/<SuiteController>/5
-    [HttpGet("{id}")]
-    public string Get(int id)
+    [HttpGet("{Id:Guid}")]
+    [ProducesResponseType(typeof(CriarUnidadeAdministrativaResposta), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(CriarUnidadeAdministrativaResposta), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetCustomerById(Guid Id)
     {
-        return "value";
+        try
+        {
+            var resp = _mapper.Map<CriarUnidadeAdministrativaResposta>(await _unAdmService.GetById(Id));
+
+            if (resp is not null) return CustomResponse(resp);
+
+            var bag = new ColecaoResultadoValidacao();
+            bag.Errors.Add(new ValidationFailure("error", "Unidade Administrativa não encontrado.", StatusCodes.Status404NotFound));
+            return CustomResponse(bag);
+        }
+        catch (Exception ex)
+        {
+            var bag = new ColecaoResultadoValidacao();
+            bag.Errors.Add(new ValidationFailure("error", ex.Message));
+            return CustomResponse(bag);
+        }
     }
 
     [HttpPost]
@@ -59,9 +78,20 @@ public class UnidadeAdministrativaController : PrincipalController
         return CustomResponse(bag);
     }
 
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody]string value)
+
+    [HttpPatch("{unAdmId:Guid}")]
+    [ProducesResponseType(typeof(CriarUnidadeAdministrativaResposta), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Patch(Guid freightId, JsonPatchDocument<PatchFreightRequest> request)
     {
+        var command = new PatchFreightRequest(request)
+        {
+            Id = freightId
+        };
+
+        var result = await _mediator.Send(command);
+
+        return CustomResponse(result);
     }
 
     [HttpDelete("{id}")]
