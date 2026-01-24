@@ -6,7 +6,7 @@ using LZSPatrimonio.Aplicacao.Comandos.Unidades.Resposta;
 using LZSPatrimonio.Dominio.Interfaces.Servicos;
 using LZSPatrimonio.Dominio.Validacao;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -43,7 +43,7 @@ public class UnidadeAdministrativaController : PrincipalController
     [ProducesResponseType(typeof(CriarUnidadeAdministrativaResposta), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(CriarUnidadeAdministrativaResposta), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetCustomerById(Guid Id)
+    public async Task<IActionResult> GetById(Guid Id)
     {
         try
         {
@@ -80,18 +80,33 @@ public class UnidadeAdministrativaController : PrincipalController
 
 
     [HttpPatch("{unAdmId:Guid}")]
-    [ProducesResponseType(typeof(CriarUnidadeAdministrativaResposta), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(UnidadeAdministrativaResposta), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Patch(Guid freightId, JsonPatchDocument<PatchFreightRequest> request)
+    public async Task<IActionResult> Patch(Guid unAdmId, JsonPatchDocument<PatchUnidadeAdministrativaRequisicao> request)
     {
-        var command = new PatchFreightRequest(request)
+        try
         {
-            Id = freightId
-        };
+            var patchUnAdmGetById = await _unAdmService.GetById(unAdmId);
 
-        var result = await _mediator.Send(command);
+            if (patchUnAdmGetById != null)
+            {
+                var command = new PatchUnidadeAdministrativaRequisicao(unAdmId, request);
+                var result = await _mediator.Send(command);
 
-        return CustomResponse(result);
+                return CustomResponse(result);
+            }
+        }
+        catch (Exception ex)
+        {
+            var bag_ex = new ColecaoResultadoValidacao();
+            bag_ex.Errors.Add(new ValidationFailure("error", ex.Message));
+            return CustomResponse(bag_ex);
+        }
+
+        var bag = new ColecaoResultadoValidacao();
+        bag.Errors.Add(new ValidationFailure("Error", $"Unidade Administrativa não encontrado"));
+        return CustomResponse(bag);
+
     }
 
     [HttpDelete("{id}")]

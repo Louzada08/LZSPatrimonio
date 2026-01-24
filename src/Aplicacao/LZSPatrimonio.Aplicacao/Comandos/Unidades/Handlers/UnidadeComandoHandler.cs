@@ -10,7 +10,8 @@ using MediatR;
 
 namespace LZSPatrimonio.Aplicacao.Comandos.Unidades.Handlers;
 public class UnidadeComandoHandler : CommandHandler,
-    IRequestHandler<CriarUnidadeRequisicao, ColecaoResultadoValidacao>
+    IRequestHandler<CriarUnidadeRequisicao, ColecaoResultadoValidacao>,
+    IRequestHandler<PatchUnidadeRequisicao, ColecaoResultadoValidacao>
 {
     private readonly IMapper _mapper;
     private readonly IUnidadeRepository _unRepository;
@@ -39,5 +40,21 @@ public class UnidadeComandoHandler : CommandHandler,
         ValidationResult.Data = _mapper.Map<CriarUnidadeResposta>(ret);
         return ValidationResult;
     }
+
+    public async Task<ColecaoResultadoValidacao> Handle(PatchUnidadeRequisicao request, CancellationToken cancellationToken)
+    {
+        var patchUnGetById = await _unService.GetById(request.Id);
+
+        var patchUn = _mapper.Map<PatchUnidadeRequisicao>(patchUnGetById);
+        request.PatchUnidadeRequest.ApplyTo(patchUn);
+
+        _mapper.Map(patchUn, patchUnGetById);
+        var ret = _unRepository.Update(patchUnGetById);
+        await PersistData(_unRepository.UnitOfWork);
+
+        ValidationResult.Data = _mapper.Map<UnidadeResposta>(ret);
+        return ValidationResult;
+    }
+
 
 }

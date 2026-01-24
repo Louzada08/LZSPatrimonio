@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation.Results;
 using LZSPatrimonio.Aplicacao.Comandos.Unidades.Requisicao;
 using LZSPatrimonio.Aplicacao.Comandos.Unidades.Resposta;
 using LZSPatrimonio.Dominio.Entities;
@@ -10,7 +11,8 @@ using MediatR;
 
 namespace LZSPatrimonio.Aplicacao.Comandos.Unidades.Handlers;
 public class UnidadeAdmComandoHandler : CommandHandler,
-    IRequestHandler<CriarUnidadeAdministrativaRequisicao, ColecaoResultadoValidacao>
+    IRequestHandler<CriarUnidadeAdministrativaRequisicao, ColecaoResultadoValidacao>,
+    IRequestHandler<PatchUnidadeAdministrativaRequisicao, ColecaoResultadoValidacao>
 {
     private readonly IMapper _mapper;
     private readonly IUnidadeAdministrativaRepository _unAdministrativaRepository;
@@ -37,6 +39,21 @@ public class UnidadeAdmComandoHandler : CommandHandler,
         var ret = await _unAdministrativaService.Create(unAdm);
 
         ValidationResult.Data = _mapper.Map<CriarUnidadeAdministrativaResposta>(ret);
+        return ValidationResult;
+    }
+
+    public async Task<ColecaoResultadoValidacao> Handle(PatchUnidadeAdministrativaRequisicao request, CancellationToken cancellationToken)
+    {
+        var patchUnAdmGetById = await _unAdministrativaService.GetById(request.Id);
+
+        var patchUnAdm = _mapper.Map<PatchUnidadeAdministrativaRequisicao>(patchUnAdmGetById);
+        request.PatchUnidAdminRequest.ApplyTo(patchUnAdm);
+
+        _mapper.Map(patchUnAdm, patchUnAdmGetById);
+        var ret = _unAdministrativaRepository.Update(patchUnAdmGetById);
+        await PersistData(_unAdministrativaRepository.UnitOfWork);
+
+        ValidationResult.Data = _mapper.Map<UnidadeAdministrativaResposta>(ret);
         return ValidationResult;
     }
 

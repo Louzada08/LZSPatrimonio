@@ -1,13 +1,20 @@
 using LZSPatrimonio.API.Configuracoes;
 using LZSPatrimonio.Infra.IoC.InjetorServicos;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(o =>
+{
+    o.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+}).AddNewtonsoftJson(o =>
+{
+    o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+});
 
 builder.Services.AddIdentityInject(builder.Configuration);
 //builder.Services.AddJwtConfiguration(builder.Configuration);
