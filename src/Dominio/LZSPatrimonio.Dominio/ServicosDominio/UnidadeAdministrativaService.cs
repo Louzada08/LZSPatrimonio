@@ -25,7 +25,7 @@ namespace LZSPatrimonio.Dominio.ServicosDominio
             var resposta = await _repository.QueryableFor(p => p.Id.Equals(id))
                 .FirstOrDefaultAsync();
 
-            if (resposta == null) throw new Exception("Category not found");
+            if (resposta == null) throw new Exception("Unidade Administrativa não encontrado!");
 
             return resposta;
         }
