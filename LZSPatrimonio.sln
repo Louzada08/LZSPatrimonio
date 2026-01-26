@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestrutura", "Infraestr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InterfaceAdapter", "InterfaceAdapter", "{8DDB8734-D47D-4E36-AF0E-36CF0FAD9E98}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{470F450D-5D62-462B-80F1-3DD69F01C111}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{470F450D-5D62-462B-80F1-3DD69F01C111}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LZSPatrimonio.Aplicacao", "src\Aplicacao\LZSPatrimonio.Aplicacao\LZSPatrimonio.Aplicacao.csproj", "{EF85B98C-D578-4513-B1B9-D4EAC169C8C2}"
 EndProject
