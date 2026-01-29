@@ -1,7 +1,6 @@
 ﻿using LZSPatrimonio.Dominio.Entities;
 using LZSPatrimonio.Dominio.Interfaces.Repositorios;
 using LZSPatrimonio.Dominio.Interfaces.Servicos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace LZSPatrimonio.Dominio.ServicosDominio
@@ -43,9 +42,10 @@ namespace LZSPatrimonio.Dominio.ServicosDominio
             throw new NotImplementedException();
         }
 
-        public Task Delete(UnidadeAdministrativa category)
+        public Task Delete(UnidadeAdministrativa unidAdm)
         {
-            throw new NotImplementedException();
+            var ret = _repository?.Remove(unidAdm);
+            return Task.FromResult(ret);
         }
 
     }

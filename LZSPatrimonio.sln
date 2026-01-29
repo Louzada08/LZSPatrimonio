@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestrutura", "Infraestr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InterfaceAdapter", "InterfaceAdapter", "{8DDB8734-D47D-4E36-AF0E-36CF0FAD9E98}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{470F450D-5D62-462B-80F1-3DD69F01C111}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{470F450D-5D62-462B-80F1-3DD69F01C111}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LZSPatrimonio.Aplicacao", "src\Aplicacao\LZSPatrimonio.Aplicacao\LZSPatrimonio.Aplicacao.csproj", "{EF85B98C-D578-4513-B1B9-D4EAC169C8C2}"
 EndProject
@@ -30,6 +30,27 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LZSPatrimonio.Infra.IoC", "src\Infraestrutura\LZSPatrimonio.Infra.IoC\LZSPatrimonio.Infra.IoC.csproj", "{F00350CF-8236-4D47-99D8-FBE4E80A8B94}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LZSPatrimonio.InterfaceAdapter", "src\InterfaceAdapter\LZSPatrimonio.InterfaceAdapter\LZSPatrimonio.InterfaceAdapter.csproj", "{A0D37B00-7102-4AB2-A6FD-EC53DF58E36D}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "lzs-patrimonio-frontend", "src\Web\lzs-patrimonio-frontend\", "{9371509B-EA07-2B56-8789-B953CB409594}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_63730"
+		Debug.AspNetCompiler.PhysicalPath = "src\Web\lzs-patrimonio-frontend\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_63730\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_63730"
+		Release.AspNetCompiler.PhysicalPath = "src\Web\lzs-patrimonio-frontend\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_63730\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "63730"
+		SlnRelativePath = "src\Web\lzs-patrimonio-frontend\"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +82,10 @@ Global
 		{A0D37B00-7102-4AB2-A6FD-EC53DF58E36D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0D37B00-7102-4AB2-A6FD-EC53DF58E36D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0D37B00-7102-4AB2-A6FD-EC53DF58E36D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9371509B-EA07-2B56-8789-B953CB409594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9371509B-EA07-2B56-8789-B953CB409594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9371509B-EA07-2B56-8789-B953CB409594}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{9371509B-EA07-2B56-8789-B953CB409594}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +103,7 @@ Global
 		{5D6E99E5-9271-417E-A82B-3058E406A763} = {E2AF8FDE-155C-4E44-9EA2-83C45FD72D2F}
 		{F00350CF-8236-4D47-99D8-FBE4E80A8B94} = {E2AF8FDE-155C-4E44-9EA2-83C45FD72D2F}
 		{A0D37B00-7102-4AB2-A6FD-EC53DF58E36D} = {8DDB8734-D47D-4E36-AF0E-36CF0FAD9E98}
+		{9371509B-EA07-2B56-8789-B953CB409594} = {470F450D-5D62-462B-80F1-3DD69F01C111}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BC27CD7B-1350-4137-B0C8-78A9A506CF24}

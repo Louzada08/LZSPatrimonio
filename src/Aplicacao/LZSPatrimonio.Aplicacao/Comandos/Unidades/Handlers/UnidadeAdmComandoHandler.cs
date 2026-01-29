@@ -12,7 +12,8 @@ using MediatR;
 namespace LZSPatrimonio.Aplicacao.Comandos.Unidades.Handlers;
 public class UnidadeAdmComandoHandler : CommandHandler,
     IRequestHandler<CriarUnidadeAdministrativaRequisicao, ColecaoResultadoValidacao>,
-    IRequestHandler<PatchUnidadeAdministrativaRequisicao, ColecaoResultadoValidacao>
+    IRequestHandler<PatchUnidadeAdministrativaRequisicao, ColecaoResultadoValidacao>,
+    IRequestHandler<DeleteUnidadeAdministrativaRequisicao, ColecaoResultadoValidacao>   
 {
     private readonly IMapper _mapper;
     private readonly IUnidadeAdministrativaRepository _unAdministrativaRepository;
@@ -57,4 +58,21 @@ public class UnidadeAdmComandoHandler : CommandHandler,
         return ValidationResult;
     }
 
+    public async Task<ColecaoResultadoValidacao> Handle(DeleteUnidadeAdministrativaRequisicao request, CancellationToken cancellationToken)
+    {
+        var delUnAdmGetById = await _unAdministrativaService.GetById(request.Id);
+
+        if (!request.IsValid()) return ValidationResult;
+
+        if (delUnAdmGetById == null)
+        {
+            AddError("Registro não existe.");
+            return ValidationResult;
+        }
+
+        _unAdministrativaRepository.Remove(delUnAdmGetById);
+        await PersistData(_unAdministrativaRepository.UnitOfWork);
+
+        return ValidationResult;
+    }
 }

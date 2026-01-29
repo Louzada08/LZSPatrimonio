@@ -16,6 +16,7 @@ public static class MediatorInjector
 
         services.AddScoped<IRequestHandler<CriarUnidadeAdministrativaRequisicao, ColecaoResultadoValidacao>, UnidadeAdmComandoHandler>();
         services.AddScoped<IRequestHandler<PatchUnidadeAdministrativaRequisicao, ColecaoResultadoValidacao>, UnidadeAdmComandoHandler>();
+        services.AddScoped<IRequestHandler<DeleteUnidadeAdministrativaRequisicao, ColecaoResultadoValidacao>, UnidadeAdmComandoHandler>();
 
         services.AddScoped<IRequestHandler<CriarUnidadeRequisicao, ColecaoResultadoValidacao>, UnidadeComandoHandler>();
 

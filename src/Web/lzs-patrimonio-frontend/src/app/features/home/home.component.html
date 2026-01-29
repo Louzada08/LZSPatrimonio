@@ -1,0 +1,98 @@
+<!-- src/app/features/home/home.component.html -->
+<div class="home-container">
+  <!-- Header -->
+  <div class="home-header">
+    <div class="header-content">
+      <h1 class="header-title">
+        <i class="pi pi-shield"></i>
+        Sistema de Controle de Patrimônio Público
+      </h1>
+      <p class="header-subtitle">
+        Gestão integrada de bens patrimoniais e processos administrativos
+      </p>
+    </div>
+  </div>
+
+  <!-- Dashboard Cards -->
+  <div class="dashboard-grid">
+    @for (card of cards; track card.title) {
+      <p-card 
+        [style]="{'border-left': '4px solid ' + card.color}"
+        styleClass="dashboard-card">
+        
+        <ng-template pTemplate="header">
+          <div class="card-header" [style.background-color]="card.color + '15'">
+            <div class="card-icon" [style.color]="card.color">
+              <i [class]="card.icon"></i>
+            </div>
+            @if (card.count !== undefined) {
+              <div class="card-count">
+                {{ card.count }}
+              </div>
+            }
+          </div>
+        </ng-template>
+
+        <div class="card-body">
+          <h3 class="card-title">{{ card.title }}</h3>
+          <p class="card-description">{{ card.description }}</p>
+        </div>
+
+        <ng-template pTemplate="footer">
+          <p-button 
+            label="Acessar" 
+            icon="pi pi-arrow-right" 
+            [text]="true"
+            iconPos="right"
+            styleClass="w-full"
+            (onClick)="navigateTo(card.route)">
+          </p-button>
+        </ng-template>
+      </p-card>
+    }
+  </div>
+
+  <!-- Quick Info Section -->
+  <div class="quick-info-section mt-5">
+    <p-card>
+      <ng-template pTemplate="header">
+        <div class="info-header">
+          <i class="pi pi-info-circle"></i>
+          <h3>Informações Rápidas</h3>
+        </div>
+      </ng-template>
+
+      <div class="grid">
+        <div class="col-12 md:col-4">
+          <div class="info-item">
+            <i class="pi pi-check-circle text-green-500"></i>
+            <div>
+              <h4>Sistema Operacional</h4>
+              <p>Todos os módulos funcionando normalmente</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-4">
+          <div class="info-item">
+            <i class="pi pi-users text-blue-500"></i>
+            <div>
+              <h4>Multiunidade</h4>
+              <p>Gestão integrada de múltiplas unidades</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-4">
+          <div class="info-item">
+            <i class="pi pi-file-edit text-purple-500"></i>
+            <div>
+              <h4>Processos Controlados</h4>
+              <p>Fluxos de trabalho automatizados</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>

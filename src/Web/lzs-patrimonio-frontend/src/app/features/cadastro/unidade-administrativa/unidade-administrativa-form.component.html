@@ -1,0 +1,90 @@
+<!-- src/app/features/cadastro/unidade-administrativa/unidade-administrativa-form.component.html -->
+<div class="card">
+  <p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+      <p-button 
+        icon="pi pi-arrow-left" 
+        [text]="true"
+        (onClick)="cancel()">
+      </p-button>
+      <h3 class="m-0 ml-3">
+        @if (isViewMode()) {
+          Visualizar
+        } @else if (isEditMode()) {
+          Editar
+        } @else {
+          Nova
+        }
+        Unidade Administrativa
+      </h3>
+    </ng-template>
+  </p-toolbar>
+
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <div class="grid">
+      <div class="col-12 md:col-3">
+        <div class="field">
+          <label for="codigoInterno">
+            Código Interno <span class="text-red-500">*</span>
+          </label>
+          <p-inputNumber
+            id="codigoInterno"
+            formControlName="codigoInterno"
+            [useGrouping]="false"
+            [min]="1"
+            [max]="32767"
+            placeholder="Digite o código"
+            styleClass="w-full"
+            [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('codigoInterno')}">
+          </p-inputNumber>
+          @if (isFieldInvalid('codigoInterno')) {
+            <small class="p-error">
+              {{ getFieldError('codigoInterno') }}
+            </small>
+          }
+        </div>
+      </div>
+
+      <div class="col-12 md:col-9">
+        <div class="field">
+          <label for="nome">
+            Nome <span class="text-red-500">*</span>
+          </label>
+          <input 
+            id="nome"
+            type="text" 
+            pInputText 
+            formControlName="nome"
+            placeholder="Digite o nome da Unidade Administrativa"
+            class="w-full"
+            [ngClass]="{'ng-invalid ng-dirty': isFieldInvalid('nome')}" />
+          @if (isFieldInvalid('nome')) {
+            <small class="p-error">
+              {{ getFieldError('nome') }}
+            </small>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-content-end gap-2 mt-4">
+      <p-button 
+        type="button"
+        label="Cancelar" 
+        icon="pi pi-times" 
+        [text]="true"
+        (onClick)="cancel()">
+      </p-button>
+      @if (!isViewMode()) {
+        <p-button 
+          type="submit"
+          [label]="isEditMode() ? 'Atualizar' : 'Salvar'" 
+          icon="pi pi-check" 
+          severity="success"
+          [loading]="loading()"
+          [disabled]="loading()">
+        </p-button>
+      }
+    </div>
+  </form>
+</div>
