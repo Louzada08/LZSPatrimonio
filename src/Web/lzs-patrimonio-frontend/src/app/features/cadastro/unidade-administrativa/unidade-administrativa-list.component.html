@@ -1,0 +1,108 @@
+<!-- src/app/features/cadastro/unidade-administrativa/unidade-administrativa-list.component.html -->
+<div class="card">
+  <p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+      <h3 class="m-0">Unidades Administrativas</h3>
+    </ng-template>
+    <ng-template pTemplate="right">
+      <p-button 
+        label="Nova Unidade Administrativa" 
+        icon="pi pi-plus" 
+        severity="success"
+        (onClick)="create()">
+      </p-button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table 
+    #dt
+    [value]="unidadesAdministrativas()" 
+    [loading]="loading()"
+    [paginator]="true" 
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [globalFilterFields]="['codigoInterno', 'nome']"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros">
+    
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input 
+            pInputText 
+            type="text" 
+            (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
+            placeholder="Buscar..." />
+        </span>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="codigoInterno">
+          Código 
+          <p-sortIcon field="codigoInterno"></p-sortIcon>
+        </th>
+        <th pSortableColumn="nome">
+          Nome 
+          <p-sortIcon field="nome"></p-sortIcon>
+        </th>
+        <th pSortableColumn="criadoEmUtc">
+          Data Criação 
+          <p-sortIcon field="criadoEmUtc"></p-sortIcon>
+        </th>
+        <th style="width: 200px">Ações</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>{{ item.codigoInterno }}</td>
+        <td>{{ item.nome }}</td>
+        <td>{{ item.criadoEmUtc | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>
+          <p-button 
+            icon="pi pi-eye" 
+            [rounded]="true"
+            [text]="true"
+            severity="info"
+            pTooltip="Visualizar"
+            tooltipPosition="top"
+            (onClick)="view(item.id)">
+          </p-button>
+          <p-button 
+            icon="pi pi-pencil" 
+            [rounded]="true"
+            [text]="true"
+            severity="warning"
+            pTooltip="Editar"
+            tooltipPosition="top"
+            styleClass="ml-2"
+            (onClick)="edit(item.id)">
+          </p-button>
+          <p-button 
+            icon="pi pi-trash" 
+            [rounded]="true"
+            [text]="true"
+            severity="danger"
+            pTooltip="Excluir"
+            tooltipPosition="top"
+            styleClass="ml-2"
+            (onClick)="delete(item.id, item.nome)">
+          </p-button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4" class="text-center">Nenhuma Unidade Administrativa encontrada.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-confirmDialog 
+  [style]="{width: '450px'}">
+</p-confirmDialog>

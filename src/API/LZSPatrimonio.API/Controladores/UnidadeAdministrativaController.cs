@@ -79,8 +79,8 @@ public class UnidadeAdministrativaController : PrincipalController
     }
 
 
-    [HttpPatch("{unAdmId:Guid}")]
-    [ProducesResponseType(typeof(UnidadeAdministrativaResposta), StatusCodes.Status200OK)]
+    [HttpPatch("{unAdmId}")]
+    [ProducesResponseType(typeof(PatchUnidadeAdministrativaRequisicao), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Patch(Guid unAdmId, JsonPatchDocument<PatchUnidadeAdministrativaRequisicao> request)
     {
@@ -110,7 +110,22 @@ public class UnidadeAdministrativaController : PrincipalController
     }
 
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    [ProducesResponseType(typeof(ColecaoResultadoValidacao), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ColecaoResultadoValidacao), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Delete(Guid id)
     {
+        try
+        {
+            var command = new DeleteUnidadeAdministrativaRequisicao(id);
+
+            var result = await _mediator.Send(command);
+
+            return CustomResponse(result);
+        }
+        catch (Exception ex)
+        {
+            return CustomResponse(StatusCodes.Status400BadRequest);
+        }
     }
 }
